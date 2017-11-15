@@ -8,6 +8,7 @@ public class PessoaDAO {
 	
 	private static ArrayList<Pessoa> listPessoas = new ArrayList<>();
 	
+	//Faz o cadastro dos usuários do tipo Aluno
 	public static int cadastrarAluno(Pessoa p) {
 		
 		for(Pessoa pessoa : listPessoas) {
@@ -20,6 +21,7 @@ public class PessoaDAO {
 		return 0;
 	}
 	
+	//Faz o cadastro dos usuários do tipo Professor
 	public static int cadastrarProfessor(Pessoa p) {
 		
 		for(Pessoa pessoa : listPessoas) {
@@ -32,6 +34,9 @@ public class PessoaDAO {
 		return 0;
 	}
 	
+	//Gera os ID's referentes a cada tipo de cadastro.
+	//Para professores é utilizado o parâmetro P, para alunos A.
+	//ID's começam no valor 1000;
 	private static String gerarID(String parameter) {
 		String id = "";
 		if(listPessoas.isEmpty()) id = parameter.toUpperCase() + 0 + 1000;
