@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import DAL.ListaAcessoDAO;
 import DAL.PessoaDAO;
 import model.Pessoa;
 
@@ -28,13 +29,12 @@ public class CadastroProfessorServlet extends HttpServlet {
 		int code = PessoaDAO.cadastrarProfessor(pessoa);
 		switch(code) {
 		case 0:
-			response.sendRedirect("login.jsp?cadastro=0"); // Obteve sucesso no cadastro
+			response.sendRedirect("login.jsp?cadastro="+ListaAcessoDAO.criarChaveAcesso(pessoa)); // Obteve sucesso no cadastro
 			break;
 		case 1:
 			response.sendRedirect("login.jsp?cadastro=1"); // Obteve erro no cadastro, email já existente
 			break;
 		}
-	}
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
     
+    <%@page import="DAL.ListaAcessoDAO, model.ChaveAcesso" %>
+    
     
     <%
     	String login = request.getParameter("login");
@@ -10,10 +12,13 @@
     			case "0":
     				login = "<div class=\"alert alert-danger alert-dismissible fade show\" role=\"alert\">Credenciais de acesso incorretas!<button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button></div>";
     				break;
-    			case "1":
-    				break;
     			default:
-    				login = "";
+    				String user = ListaAcessoDAO.obterUsuarioPelaChave(login);
+    				if(user != null){
+    					ListaAcessoDAO.removerChaveAcesso(login);
+    					session.setAttribute("userid", user);
+    					login = session.getAttribute("userid").toString();
+    				}
     				break;
     		}
     	} else {
@@ -25,10 +30,23 @@
     				cadastro = "<div class=\"alert alert-danger alert-dismissible fade show\" role=\"alert\">E-mail de cadastro já existe!<button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button></div>";
     				break;
    				default:
+   					String user = ListaAcessoDAO.obterUsuarioPelaChave(login);
+    				if(user != null){
+    					ListaAcessoDAO.removerChaveAcesso(login);
+    					session.setAttribute("userid", user);
+    					login = session.getAttribute("userid").toString();
+    				}
    					break;
     		}
     	} else {
     		cadastro = "";
+    	}       	
+    %>
+    
+    <%
+    
+    	if(session.getAttribute("userid") != null){
+    		response.sendRedirect("instituicoes.jsp");
     	}
     
     %>
@@ -55,52 +73,9 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
 
     <script type="text/javascript">
-    	
-    	$(document).ready(function(){
-    		document.getElementById('inputAluno').onchange = function (evt) {
-			    var tgt = evt.target || window.event.srcElement,
-			        files = tgt.files;
-
-			    // FileReader support
-			    if (FileReader && files && files.length) {
-			        var fr = new FileReader();
-			        fr.onload = function () {
-			            document.getElementById('imgAluno').src = fr.result;
-			        }
-			        fr.readAsDataURL(files[0]);
-			    }
-
-			    // Not supported
-			    else {
-			        // fallback -- perhaps submit the input to an iframe and temporarily store
-			        // them on the server until the user's session ends.
-			    }
-			}
-
-			document.getElementById('inputProfessor').onchange = function (evt) {
-			    var tgt = evt.target || window.event.srcElement,
-			        files = tgt.files;
-
-			    // FileReader support
-			    if (FileReader && files && files.length) {
-			        var fr = new FileReader();
-			        fr.onload = function () {
-			            document.getElementById('imgProfessor').src = fr.result;
-			        }
-			        fr.readAsDataURL(files[0]);
-			    }
-
-			    // Not supported
-			    else {
-			        // fallback -- perhaps submit the input to an iframe and temporarily store
-			        // them on the server until the user's session ends.
-			    }
-			}
-    	});
-
     </script>
 </head>
-<body>
+<body>	
 	<nav class="navbar navbar-expand-lg navbar-light bg-light">
     	<div class="container">
 			<i class="fa fa-commenting-o" aria-hidden="true" style="color: orange;"></i>
@@ -206,7 +181,7 @@
 	        </button>
 	      </div>
 	      <div class="modal-body">
-	        <form>
+	        <form action="CadastroProfessorServlet" method="post">
 	        	<div class="form-group">
 				    <label for="inputNome">Nome Completo</label>
 				    <input name="edtNome" type="text" class="form-control" id="inputNome" aria-describedby="emailHelp" placeholder="Ex: Lucas">
