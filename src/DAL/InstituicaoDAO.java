@@ -21,4 +21,8 @@ public class InstituicaoDAO {
 		return 0;
 	}
 	
+	public static ArrayList<Instituicao> getListInstituicoes(){
+		return listInstituicao;
+	}
+	
 }

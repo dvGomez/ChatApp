@@ -52,5 +52,14 @@ public class PessoaDAO {
 		}
 		return null;
 	}
+	
+	public static Pessoa getPessoaByID(String id) {
+		for(Pessoa p : listPessoas) {
+			if(p.getId().equals(id)) {
+				return p;
+			}
+		}
+		return null;
+	}
 
 }

@@ -5,7 +5,7 @@ import java.util.Date;
 
 public class Instituicao {
 	
-	private String id, nome;
+	private String id, nome, descricao;
 	private Date dtCriacao;
 	private ArrayList<Sala> listSalas = new ArrayList<>();
 	
@@ -33,6 +33,14 @@ public class Instituicao {
 	public void setDtCriacao(Date dtCriacao) {
 		this.dtCriacao = dtCriacao;
 	}
+	public String getDescricao() {
+		return descricao;
+	}
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
+	
+	
 	
 
 }
