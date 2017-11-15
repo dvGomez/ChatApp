@@ -36,12 +36,21 @@ public class PessoaDAO {
 	
 	//Gera os ID's referentes a cada tipo de cadastro.
 	//Para professores é utilizado o parâmetro P, para alunos A.
-	//ID's começam no valor 1000;
+	//ID's iniciam no valor 1000;
 	private static String gerarID(String parameter) {
 		String id = "";
 		if(listPessoas.isEmpty()) id = parameter.toUpperCase() + 0 + 1000;
 		else id = parameter.toUpperCase() + listPessoas.size() + 1000;
 		return id;
+	}
+	
+	public static Pessoa getPessoaByEmail(String email) {
+		for(Pessoa p : listPessoas) {
+			if(p.getEmail().equalsIgnoreCase(email)) {
+				return p;
+			}
+		}
+		return null;
 	}
 
 }
