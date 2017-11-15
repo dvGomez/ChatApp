@@ -4,6 +4,7 @@
     
     <%
     	String login = request.getParameter("login");
+    	String cadastro = request.getParameter("cadastro");
     	if(login != null){
     		switch(login){
     			case "0":
@@ -15,6 +16,19 @@
     				login = "";
     				break;
     		}
+    	} else {
+    		login = "";
+    	}
+    	if(cadastro != null){
+    		switch(cadastro){
+    			case "1":
+    				cadastro = "<div class=\"alert alert-danger alert-dismissible fade show\" role=\"alert\">E-mail de cadastro já existe!<button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button></div>";
+    				break;
+   				default:
+   					break;
+    		}
+    	} else {
+    		cadastro = "";
     	}
     
     %>
@@ -120,6 +134,7 @@
 					<div class="card-body">
 					
 						<%= login %>
+						<%= cadastro %>
 						
 						<div class="tab-content" id="pills-tabContent">
 							<!-- Sou Aluno -->
@@ -161,7 +176,7 @@
 	        </button>
 	      </div>
 	      <div class="modal-body">
-	        <form>
+	        <form action="CadastroAlunoServlet" method="post">
 	        	<div class="form-group">
 				    <label for="inputNome">Nome Completo</label>
 				    <input name="edtNome" type="text" class="form-control" id="inputNome" aria-describedby="emailHelp" placeholder="Ex: Lucas">
