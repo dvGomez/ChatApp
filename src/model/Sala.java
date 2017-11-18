@@ -4,15 +4,37 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class Sala {
-	private String id, nome, senha;
+	private String id, nome, senha, descricao;
 	private Date dtCriacao;
 	private ArrayList<Pessoa> listPessoas = new ArrayList<>();
 	private ArrayList<Aviso> listAvisos = new ArrayList<>();
 	private ArrayList<Mensagem> listMensagem = new ArrayList<>();
 	
+	public Sala () {}
+	
+	public Sala(String nome, String desc, String senha) {
+		this.nome = nome;
+		this.descricao = desc;
+		this.senha = senha;
+	}
+	
+	public Sala(String nome, String desc) {
+		this.nome = nome;
+		this.descricao = desc;
+	}
+	
+	public String getDescricao() {
+		return descricao;
+	}
+	
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
+	
 	public ArrayList<Pessoa> getListPessoas() {
 		return listPessoas;
 	}
+	
 	public void setListPessoas(ArrayList<Pessoa> listPessoas) {
 		this.listPessoas = listPessoas;
 	}

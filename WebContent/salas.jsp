@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
-    <%@ page import="DAL.InstituicaoDAO, java.util.*, model.Instituicao, model.Pessoa, DAL.PessoaDAO" %>
+    <%@ page import="DAL.InstituicaoDAO, java.util.*, model.Instituicao, model.Pessoa, model.Sala, DAL.PessoaDAO, DAL.SalasDAO" %>
     
     <%  
     	Pessoa pessoa = new Pessoa();
@@ -16,16 +16,28 @@
     		}
     	} else {
     		System.out.println("redirect2");
-    		response.sendRedirect("index.jsp");
     	}
     %>
     
     <%
-    
-    	ArrayList<Instituicao> listEscolas = InstituicaoDAO.getListInstituicoes();
-    
+   		ArrayList<Sala> listSalas = new ArrayList<>();
+    	Instituicao instituicao = new Instituicao();
+    	if(request.getParameter("room") != null){
+    		String idRoom = request.getParameter("room").toString();
+    		instituicao = InstituicaoDAO.getInstituicaoById(idRoom);
+    		if(instituicao != null){
+    			listSalas = instituicao.getListSalas();
+    		} else{
+    			response.sendRedirect("instituicoes.jsp");
+    		}
+    		if(listSalas == null){
+    			response.sendRedirect("instituicoes.jsp");
+    		}
+    	} else {
+    		response.sendRedirect("instituicoes.jsp");
+    	}
     %>
-<% if(pessoa != null && pessoa.getId() != null){ %>
+<% if(pessoa != null && pessoa.getId() != null && instituicao != null){ %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -54,7 +66,7 @@
 	
 		<div class="container">
 			<i class="fa fa-commenting-o" aria-hidden="true" style="color: orange;"></i>
-			<a class="navbar-brand" href="#"> Escolha sua instituição para participar</a>
+			<a class="navbar-brand" href="#"> Salas de chat de <%= instituicao.getNome() %></a>
 			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
 			</button>
@@ -79,18 +91,9 @@
 					
 			<%
 			
-				if(listEscolas.isEmpty()){
+				if(!listSalas.isEmpty()){
 					%>
 					
-					<div class="alert alert-primary mt-4">
-						<strong>Nenhuma instituição cadastrada.</strong><br>
-						Para começar a cadastrar uma instituição, contate a administração da sua escola.<br>
-						Se você é professor, basta clicar em cadastrar nova instituição no card abaixo!
-					</div>
-					
-					<%
-				} else {
-					%>
 					<form class="form mt-4">
 						<div class="row justify-content-center">
 							<div class="col-10">
@@ -106,30 +109,25 @@
 				}
 			
 			%>
-			
-			<%
-					if(pessoa.getId().contains("P")){
-						%>
-						<div class="alert alert-info mt-4">
-							<strong>Cadastre sua instituição no Chat Application!</strong><br>
-							Cadastre sua instituição e mantenha sua escola mais conectada do que nunca!<br>
-							<a href="CadastrarInstituicao.jsp">Clique aqui para cadastrar sua instituição.</a>
-						</div>
-						<%
-					}
-				%>
+			<div class="alert alert-info mt-4">
+				<strong>Cadastre sua sala de chat!</strong><br>
+				Cadastre uma sala de chat para conversar com seus amigos, colegas e professores de sala!
+				<form action="CadastrarSala.jsp" method="post">
+					<button style="padding: 0 !important; "class="btn btn-link"  value="<%= instituicao.getId() %>" name="btnCadastrarSala">Cadastrar sala de chat</button>
+				</form>
+			</div>
 
 			<div class="card-columns mt-4">
 				
-				<%	for(Instituicao i : listEscolas){ %>
+				<%	for(Sala i : listSalas){ %>
 						
 				<div class="card">
 					<div class="card-body">
 						<h5 class="card-title"><%= i.getNome() %></h5>
 						<hr>
 						<p><%= i.getDescricao() %></p>
-						<p class="card-text"><small class="text-muted">Total de salas: <%= i.getListSalas().size() %></small></p>
-						<a class="btn btn-block btn-primary" href="salas.jsp?room=<%= i.getId()%>">Entrar</a>
+						<p class="card-text"><small class="text-muted">Participantes: <%= i.getListPessoas().size() %></small></p>
+						<a class="btn btn-block btn-primary" href="">Entrar</a>
 					</div>
 				</div>
 						
@@ -140,7 +138,6 @@
 </body>
 </html>
 <% } else {
-		session.setAttribute("userid", null);
-		response.sendRedirect("index.jsp");
+		
 	}
 	%>

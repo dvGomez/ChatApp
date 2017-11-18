@@ -9,7 +9,7 @@
     		if(session.getAttribute("userid") != null){
     			String userid = session.getAttribute("userid").toString();
     			System.out.println(userid + " << USERID " );
-    			pessoa = PessoaDAO.getPessoaByID(userid);
+    			pessoa = PessoaDAO.getPessoaByID(session.getAttribute("userid").toString());
     		} else{
     			System.out.println("redirect1");
     			response.sendRedirect("index.jsp");
@@ -21,11 +21,20 @@
     %>
     
     <%
-    
-    	ArrayList<Instituicao> listEscolas = InstituicaoDAO.getListInstituicoes();
-    
+    	String erro = request.getParameter("erro");
+    	if(erro != null){
+    		switch(erro){
+	    		case "1":
+	    			erro = "<div class=\"alert alert-danger alert-dismissible fade show\" role=\"alert\">Nome ou descrição inválidos!<button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button></div>";
+	    			break;
+	    		default:
+	    			erro = "";
+    		}
+    	} else {
+    		erro = "";
+    	}
     %>
-<% if(pessoa != null && pessoa.getId() != null){ %>
+    
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -50,11 +59,12 @@
 </head>
 <body>
 <body class="bg-dark">
+	<% if(pessoa != null){%>
 	<nav class="navbar navbar-expand-lg navbar-light bg-light">
 	
 		<div class="container">
 			<i class="fa fa-commenting-o" aria-hidden="true" style="color: orange;"></i>
-			<a class="navbar-brand" href="#"> Escolha sua instituição para participar</a>
+			<a class="navbar-brand" href="#"> Cadastre sua instituição</a>
 			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
 			</button>
@@ -75,72 +85,48 @@
 			</div>
 		</div>
 	</nav>
+	
 	<div class="container">
-					
-			<%
-			
-				if(listEscolas.isEmpty()){
-					%>
-					
-					<div class="alert alert-primary mt-4">
-						<strong>Nenhuma instituição cadastrada.</strong><br>
-						Para começar a cadastrar uma instituição, contate a administração da sua escola.<br>
-						Se você é professor, basta clicar em cadastrar nova instituição no card abaixo!
-					</div>
-					
-					<%
-				} else {
-					%>
-					<form class="form mt-4">
-						<div class="row justify-content-center">
-							<div class="col-10">
-								<input class="form-control" type="search" placeholder="Procure uma instituição" aria-label="Search">
-							</div>
-							<div class="col-1">
-								<button class="btn btn-outline-light " type="submit"><i class="fa fa-search" aria-hidden="true"></i>
-							</div>
-						</div>
-						</button>
-					</form>
-					<%
-				}
-			
-			%>
-			
-			<%
-					if(pessoa.getId().contains("P")){
-						%>
-						<div class="alert alert-info mt-4">
-							<strong>Cadastre sua instituição no Chat Application!</strong><br>
-							Cadastre sua instituição e mantenha sua escola mais conectada do que nunca!<br>
-							<a href="CadastrarInstituicao.jsp">Clique aqui para cadastrar sua instituição.</a>
-						</div>
-						<%
-					}
-				%>
-
-			<div class="card-columns mt-4">
-				
-				<%	for(Instituicao i : listEscolas){ %>
-						
-				<div class="card">
-					<div class="card-body">
-						<h5 class="card-title"><%= i.getNome() %></h5>
-						<hr>
-						<p><%= i.getDescricao() %></p>
-						<p class="card-text"><small class="text-muted">Total de salas: <%= i.getListSalas().size() %></small></p>
-						<a class="btn btn-block btn-primary" href="salas.jsp?room=<%= i.getId()%>">Entrar</a>
-					</div>
-				</div>
-						
-				<%	}  %>
-
+		<div class="card mt-4">
+			<div class="card-body">
+			<div class="alert alert-primary">
+			<strong>Atenção</strong><br>
+			Antes de continuar, certifique-se de que a sua instituição já não está cadastrada no Chat Application!<br>
+			<a href="instituicoes.jsp">Clique aqui para verificar.</a>
 			</div>
+			<%= erro %>
+			<form action="CadastrarInstituicaoServlet" method="get">
+			  <div class="form-group row">
+			    <label for="inputEmail3" class="col-sm-2 col-form-label">Nome</label>
+			    <div class="col-sm-10">
+			      <input name="edtNome" type="text" class="form-control" id="inputNome" placeholder="Nome da sua instituição">
+			    </div>
+			  </div>
+			  <div class="form-group row">
+			    <label for="inputPassword3" class="col-sm-2 col-form-label">Descrição</label>
+			    <div class="col-sm-10">
+			      <input name="edtDescricao" type="text" class="form-control" id="inputDescricao" placeholder="Descreva sua instituição em poucas palavras">
+			    </div>
+			  </div>
+			  <div class="form-group row">
+			    <div class="col-sm-12">
+			      <button type="submit" class="btn btn-primary float-right">Cadastrar</button>
+			    </div>
+			  </div>
+			</form>
+			</div>
+		</div>
 	</div>
+	
+	<% } else {%>
+	
+		<div class="container">
+			<div class="alert alert-danger mt-4">
+				Você não tem permissão para acessar essa página.<br>
+				<a href="index.jsp">Voltar</a>
+			</div>
+		</div>
+	
+	<%}%>
 </body>
 </html>
-<% } else {
-		session.setAttribute("userid", null);
-		response.sendRedirect("index.jsp");
-	}
-	%>

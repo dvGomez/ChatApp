@@ -30,6 +30,7 @@ public class CadastroProfessorServlet extends HttpServlet {
 		switch(code) {
 		case 0:
 			response.sendRedirect("login.jsp?cadastro="+ListaAcessoDAO.criarChaveAcesso(pessoa)); // Obteve sucesso no cadastro
+			System.out.println("Token de acesso de cadastro do usuário: " + pessoa.getNome() + " criada!");
 			break;
 		case 1:
 			response.sendRedirect("login.jsp?cadastro=1"); // Obteve erro no cadastro, email já existente

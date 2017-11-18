@@ -28,6 +28,7 @@ public class LoginServlet extends HttpServlet {
 			if(pessoa != null) {
 				if(pessoa.getSenha().equals(senha)) {
 					response.sendRedirect("login.jsp?login="+ListaAcessoDAO.criarChaveAcesso(pessoa)); // Obteve sucesso no login
+					System.out.println("Token de acesso de login do usuário: " + pessoa.getNome() + " criada!");
 				} else {
 					response.sendRedirect("login.jsp?login=0");
 				}

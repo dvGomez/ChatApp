@@ -2,6 +2,11 @@
     pageEncoding="UTF-8"%>
     
     <%
+    	if(request.getAttribute("logout") != null){
+    		System.out.println("");
+    		session.setAttribute("userid", null);
+    		session.invalidate();
+    	}
     
     	if(session.getAttribute("userid") != null){
     		response.sendRedirect("instituicoes.jsp");
@@ -28,8 +33,8 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
 </head>
 <body>
-<body class="bg-white">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+<body style="background: #3498db;">
+    <nav class="navbar navbar-expand-lg navbar-dark" style="background: #3498db !important;">
     	<div class="container">
 			<i class="fa fa-commenting-o" aria-hidden="true" style="color: orange;"></i>
  			 <a class="navbar-brand" href="#"> Chat Application</a>
@@ -39,33 +44,39 @@
 			<div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
 			<ul class="navbar-nav">
 			  <li class="nav-item active">
-			    <a class="nav-link" data-target="#exampleModal">Home <span class="sr-only">(current)</span></a>
+			    <a class="nav-link">Home <span class="sr-only">(current)</span></a>
 			  </li>
 			  <li class="nav-item">
-			    <a class="nav-link" href="login.jsp" data-target="#exampleModal">Cadastro</a>
+			    <a class="nav-link" href="login.jsp">Cadastro</a>
+			  </li>
+			  <li class="nav-item">
+			    <a class="nav-link" href="login.jsp">Login</a>
+			  </li>
+			  <li class="nav-item">
+			    <a class="nav-link" href="#">Sobre</a>
 			  </li>
 			</ul>
 			</div>
     	</div>
 	</nav>
 	<div class="container">
-		<div class="row">
-			<div class="col-lg-12 text-center mt-4">
-				<h1 style="font-size: 8rem;"><i class="fa fa-commenting-o" aria-hidden="true" style="color: orange;"></i></h1>
+		<div class="row mt-4">
+			<div class="col-lg-12 text-center mt-4 text-light">
+				<h1 style="font-size: 8rem;" class="mt-4"><i class="fa fa-commenting-o text-warning" aria-hidden="true"></i></h1>
 				<p class="slogan">Converse com seus professores e colegas de classe por essa incrível ferramenta de chat online!</p>
 			</div>
-			<div class="col-lg-12 text-center">
-				<a href="login.jsp" class="btn btn-primary text-white">Comece Agora!</a>
+			<div class="col-lg-12 text-center mb-4">
+				<a href="login.jsp" class="btn btn-outline-light mb-4">Comece Agora!</a>
 			</div>
 		</div>
 	</div>
 	<div class="row">
 		
-		<div class="col-lg-12 mt-4 pt-1 text-center" style="background: #34495e;">
+		<div class="col-lg-12 outline-top text-center" style="background: #2980b9;">
 			
 			<div class="container">
 
-				<h3 class="text-light" >. . .</h3>
+				<h3 class="text-light mt-4" >. . .</h3>
 				
 				<div class="row p-4">
 
@@ -118,39 +129,45 @@
 
 				</div>
 
-				<h3 class="text-light" >. . .</h3>
+				<h3 class="text-light mb-4" >. . .</h3>
 
 			</div>	
 
 		</div>
 
 	</div>
-
-	<div class="container mt-4">
-		<div class="row">
-			<div class="col-lg-6 mt-1">
-				<div class="card">
-				  <ul class="list-group list-group-flush">
-				    <li class="list-group-item text-center">Cadastre sua instituição</li>
-				    <li class="list-group-item text-center">Crie salas de chat com suas preferencias</li>
-				    <li class="list-group-item text-center">Monitore em tempo real os assuntos mais falados</li>
-				  </ul>
+	
+	<div class="row outline-top">
+		<div class="col-lg-12 mt-3">
+		
+			<h3 class=" mb-2 text-uppercase text-white text-center font-italic" style="letter-spacing:0.1rem;"><i class="fa fa-fire" aria-hidden="true"></i>
+			 Funcionalidades</h3>
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-6">
+						<div class="card mt-1">
+						  <ul class="list-group list-group-flush">
+						    <li class="list-group-item text-center">Cadastre sua instituição</li>
+						    <li class="list-group-item text-center">Crie salas de chat com suas preferencias</li>
+						    <li class="list-group-item text-center">Monitore em tempo real os assuntos mais falados</li>
+						  </ul>
+						</div>
+					</div>
+					<div class="col-lg-6">
+						<div class="card mt-1">
+						  <ul class="list-group list-group-flush">
+						    <li class="list-group-item text-center">Controle total de permissões</li>
+						    <li class="list-group-item text-center">Destaque avisos e avaliações</li>
+						    <li class="list-group-item text-center">Defina senhas e permissões para cada sala</li>
+						  </ul>
+						</div>
+					</div>
 				</div>
 			</div>
-
-			<div class="col-lg-6 mt-1">
-				<div class="card">
-				  <ul class="list-group list-group-flush">
-				    <li class="list-group-item text-center">Controle total de permissões</li>
-				    <li class="list-group-item text-center">Destaque avisos e avaliações</li>
-				    <li class="list-group-item text-center">Defina senhas e permissões para cada sala</li>
-				  </ul>
-				</div>
-			</div>	
-		</div>
+		</div>	
 	</div>
 	<hr>
-	<div class="container mt-4 text-center">
+	<div class="container mt-4 text-center text-light">
 		<h6>@Java Web Application - Final Project</h6>
 	</div>
 

@@ -9,6 +9,13 @@ public class Instituicao {
 	private Date dtCriacao;
 	private ArrayList<Sala> listSalas = new ArrayList<>();
 	
+	public Instituicao() {}
+	
+	public Instituicao(String nome, String descricao) {
+		this.nome = nome;
+		this.descricao = descricao;
+	}
+	
 	public ArrayList<Sala> getListSalas() {
 		return listSalas;
 	}
