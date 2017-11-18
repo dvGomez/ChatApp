@@ -127,7 +127,25 @@
 						<hr>
 						<p><%= i.getDescricao() %></p>
 						<p class="card-text"><small class="text-muted">Participantes: <%= i.getListPessoas().size() %></small></p>
+						<% if(!i.getSenha().isEmpty()) {%>
+						<a class="btn btn-primary btn-block" data-toggle="collapse" href="#collapse<%= i.getId() %>" aria-expanded="false" aria-controls="collapsecollapse<%= i.getId() %>">
+						    Entrar
+						</a>
+						<div class="collapse mt-2" id="collapse<%= i.getId() %>">
+						  	<form>
+							  <div class="row">
+							  	<div class="col-8">
+							  		<input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+							  	</div>
+							  	<div class="col-4">
+							  		<button type="submit" class="btn btn-success btn-block">></button>
+							  	</div>
+							  </div>
+							</form>
+						</div>
+						<% } else { %>
 						<a class="btn btn-block btn-primary" href="">Entrar</a>
+						<% } %>
 					</div>
 				</div>
 						
