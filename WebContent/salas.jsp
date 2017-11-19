@@ -123,25 +123,42 @@
 						
 				<div class="card">
 					<div class="card-body">
-						<h5 class="card-title"><%= i.getNome() %></h5>
+						<h5 class="card-title"><%= i.getNome() %>
+						<% if(!i.getSenha().isEmpty()){ %>
+						<button type="button" class="close" aria-label="Close">
+				          <span aria-hidden="true"><i class="fa fa-lock" aria-hidden="true"></i>
+						  </span>
+				        </button>
+				        <%} %>				        
+				        </h5>
 						<hr>
 						<p><%= i.getDescricao() %></p>
 						<p class="card-text"><small class="text-muted">Participantes: <%= i.getListPessoas().size() %></small></p>
 						<% if(!i.getSenha().isEmpty()) {%>
-						<a class="btn btn-primary btn-block" data-toggle="collapse" href="#collapse<%= i.getId() %>" aria-expanded="false" aria-controls="collapsecollapse<%= i.getId() %>">
-						    Entrar
-						</a>
-						<div class="collapse mt-2" id="collapse<%= i.getId() %>">
-						  	<form>
-							  <div class="row">
-							  	<div class="col-8">
-							  		<input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-							  	</div>
-							  	<div class="col-4">
-							  		<button type="submit" class="btn btn-success btn-block">></button>
-							  	</div>
-							  </div>
-							</form>
+						<button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#modal<%= i.getId() %>">
+						  Entrar
+						</button>
+						<div class="modal fade" id="modal<%= i.getId() %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+						  <div class="modal-dialog" role="document">
+						    <div class="modal-content">
+						      <div class="modal-header">
+						        <h5 class="modal-title" id="exampleModalLabel"><%= i.getNome() %></h5>
+						        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						          <span aria-hidden="true">&times;</span>
+						        </button>
+						      </div>
+						      <form action="EntrarSalaServlet" method="post">
+							      <div class="modal-body">
+							        <label for="edtSenha">Para acessar esta sala é necessário que você insira a senha:</label>
+	    							<input type="password" class="form-control" id="edtSenha" placeholder="Informe a senha da sala">
+							      </div>
+							      <div class="modal-footer">
+							        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+							        <button name="btnSala" value="<%= i.getId() %>" type="submit" class="btn btn-primary">Acessar</button>
+							      </div>
+						      </form>
+						    </div>
+						  </div>
 						</div>
 						<% } else { %>
 						<a class="btn btn-block btn-primary" href="">Entrar</a>
