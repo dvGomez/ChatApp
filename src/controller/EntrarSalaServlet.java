@@ -19,7 +19,11 @@ public class EntrarSalaServlet extends HttpServlet {
 		String senha = request.getParameter("edtSenha");
 		String idRoom = request.getParameter("btnSala");
 		if(idRoom != null) {
-			
+			if(senha != null) {
+				
+			} else {
+				
+			}
 		} else {
 			response.sendRedirect("");
 		}

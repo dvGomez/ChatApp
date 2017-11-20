@@ -22,6 +22,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://fonts.googleapis.com/css?family=Fredericka+the+Great" rel="stylesheet"> 
 
     <!-- CSS principal -->
     <link rel="stylesheet" type="text/css" href="css/style.css">
@@ -33,8 +34,8 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
 </head>
 <body>
-<body style="background: #3498db;">
-    <nav class="navbar navbar-expand-lg navbar-dark" style="background: #3498db !important;">
+<body style="background:#FFF; ">
+    <nav class="navbar navbar-expand-lg navbar-light" style="background: #FFF !important;">
     	<div class="container">
 			<i class="fa fa-commenting-o" aria-hidden="true" style="color: orange;"></i>
  			 <a class="navbar-brand" href="#"> Chat Application</a>
@@ -59,20 +60,20 @@
 			</div>
     	</div>
 	</nav>
-	<div class="container">
+	<div class="container mb-4 mt-4" style=" background:#5B8930; border-radius:1rem;; border:1rem #523D1F solid !important;">
 		<div class="row mt-4">
-			<div class="col-lg-12 text-center mt-4 text-light">
-				<h1 style="font-size: 8rem;" class="mt-4"><i class="fa fa-commenting-o text-warning" aria-hidden="true"></i></h1>
-				<p class="slogan">Converse com seus professores e colegas de classe por essa incrível ferramenta de chat online!</p>
+			<div class="col-lg-12 text-center text-light">
+				<h1 style="font-size: 8rem;" class="mt-4"><i class="fa fa-commenting-o text-light" aria-hidden="true"></i></h1>
+				<p style="font-family: 'Fredericka the Great', cursive;" class="slogan">Converse com seus professores e colegas de classe por essa incrível ferramenta de chat online!</p>
 			</div>
 			<div class="col-lg-12 text-center mb-4">
 				<a href="login.jsp" class="btn btn-outline-light mb-4">Comece Agora!</a>
 			</div>
 		</div>
 	</div>
-	<div class="row">
+	<div class="row bg-dark">
 		
-		<div class="col-lg-12 outline-top text-center" style="background: #2980b9;">
+		<div class="col-lg-12 outline-top text-center">
 			
 			<div class="container">
 
@@ -167,7 +168,7 @@
 		</div>	
 	</div>
 	<hr>
-	<div class="container mt-4 text-center text-light">
+	<div class="container mt-4 text-center text-dark">
 		<h6>@Java Web Application - Final Project</h6>
 	</div>
 

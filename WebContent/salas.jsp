@@ -161,7 +161,9 @@
 						  </div>
 						</div>
 						<% } else { %>
-						<a class="btn btn-block btn-primary" href="">Entrar</a>
+						<form action="EntrarSalaServlet" method="post">
+							<button name="btnSala" value="<%= i.getId() %>" class="btn btn-block btn-primary">Entrar</button>
+						</form>
 						<% } %>
 					</div>
 				</div>

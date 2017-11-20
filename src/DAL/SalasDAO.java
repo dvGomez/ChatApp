@@ -24,7 +24,7 @@ public class SalasDAO {
 		return null;
 	}
 	
-	public static ArrayList<Sala> getSalasById(String idRoom){
+	public static ArrayList<Sala> getSalas(String idRoom){
 		return InstituicaoDAO.getInstituicaoById(idRoom).getListSalas();
 	}
 
