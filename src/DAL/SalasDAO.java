@@ -27,5 +27,13 @@ public class SalasDAO {
 	public static ArrayList<Sala> getSalas(String idRoom){
 		return InstituicaoDAO.getInstituicaoById(idRoom).getListSalas();
 	}
-
+	
+	public static Sala getSalaByIds(String idRoom, String idSala) {
+		ArrayList<Sala> listSalas = getSalas(idRoom);
+		for(Sala s : listSalas) {
+			if(s.getId().equalsIgnoreCase(idSala)) return s;
+		}
+		return null;
+	}
+	
 }

@@ -34,10 +34,10 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
 </head>
 <body>
-<body style="background:#FFF; ">
-    <nav class="navbar navbar-expand-lg navbar-light" style="background: #FFF !important;">
+<body style="background-image: url('imgs/backgrounds.jpg'); background-position:center; background-attachment: fixed; background-repeat:no-repat; background-size:cover;">
+    <nav class="navbar navbar-expand-lg navbar-dark" style="background:rgba(0, 0, 0, 0.2);">
     	<div class="container">
-			<i class="fa fa-commenting-o" aria-hidden="true" style="color: orange;"></i>
+			<i class="fa fa-commenting-o" aria-hidden="true" style="color: orange; "></i>
  			 <a class="navbar-brand" href="#"> Chat Application</a>
 			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
@@ -60,11 +60,11 @@
 			</div>
     	</div>
 	</nav>
-	<div class="container mb-4 mt-4" style=" background:#5B8930; border-radius:1rem;; border:1rem #523D1F solid !important;">
+	<div class="container mb-4 mt-4" style="">
 		<div class="row mt-4">
-			<div class="col-lg-12 text-center text-light">
+			<div class="col-lg-12 text-center text-light mt-4">
 				<h1 style="font-size: 8rem;" class="mt-4"><i class="fa fa-commenting-o text-light" aria-hidden="true"></i></h1>
-				<p style="font-family: 'Fredericka the Great', cursive;" class="slogan">Converse com seus professores e colegas de classe por essa incrível ferramenta de chat online!</p>
+				<p class="slogan mt-4" style="background:rgba(0, 0, 0, 0.2);">Converse com seus professores e colegas de classe por essa incrível ferramenta de chat online!</p>
 			</div>
 			<div class="col-lg-12 text-center mb-4">
 				<a href="login.jsp" class="btn btn-outline-light mb-4">Comece Agora!</a>
@@ -117,7 +117,7 @@
 					<div class="col-4 col-lg-1">
 						<img style="width: 100%;" src="https://scontent.fbfh4-1.fna.fbcdn.net/v/t1.0-9/22788932_10213388628043730_7181212759899852993_n.jpg?oh=eeabef9c98fb8c0d05cfc065ff1025fc&oe=5A99941A" alt="profile" class="rounded-circle"></div>
 					<div class="col-8 col-lg-9 text-left">
-						<div class="card msgBox bg-warning">
+						<div class="card msgBox bg-warning" style="border:0.2rem solid #FFF;">
 						  <div class="card-header font-weight-bold">
 						  	Professor
 						  </div>
@@ -168,7 +168,7 @@
 		</div>	
 	</div>
 	<hr>
-	<div class="container mt-4 text-center text-dark">
+	<div class="container mt-4 text-center text-light">
 		<h6>@Java Web Application - Final Project</h6>
 	</div>
 

@@ -108,7 +108,7 @@
 			%>
 			
 			<%
-					if(pessoa.getId().contains("A")){
+					if(pessoa.getId().contains("P")){
 						%>
 						<div class="alert alert-info mt-4">
 							<strong>Cadastre sua instituição no Chat Application!</strong><br>

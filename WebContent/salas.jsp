@@ -18,6 +18,21 @@
     		System.out.println("redirect2");
     	}
     %>
+    <%
+    String erro = request.getParameter("error");
+    if(erro != null){
+    		switch(erro){
+    			case "1":
+    				erro = "<div class=\"mt-4 alert alert-danger alert-dismissible fade show\" role=\"alert\">Senha da sala incorreta!<button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button></div>";
+    				break;
+    			default:
+    				erro = "";
+    				break;
+    		}
+    	} else {
+    		erro = "";
+    	}
+     %>
     
     <%
    		ArrayList<Sala> listSalas = new ArrayList<>();
@@ -109,6 +124,9 @@
 				}
 			
 			%>
+			
+			<%= erro %>
+			
 			<div class="alert alert-info mt-4">
 				<strong>Cadastre sua sala de chat!</strong><br>
 				Cadastre uma sala de chat para conversar com seus amigos, colegas e professores de sala!
@@ -132,7 +150,7 @@
 				        <%} %>				        
 				        </h5>
 						<hr>
-						<p><%= i.getDescricao() %></p>
+						<p><%= i.getDescricao()%></p>
 						<p class="card-text"><small class="text-muted">Participantes: <%= i.getListPessoas().size() %></small></p>
 						<% if(!i.getSenha().isEmpty()) {%>
 						<button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#modal<%= i.getId() %>">
@@ -149,12 +167,13 @@
 						      </div>
 						      <form action="EntrarSalaServlet" method="post">
 							      <div class="modal-body">
+							      	<input type="text" name="edtRoom" style="display: none !important;" class="form-control invisible" id="edtRoom" value="<%= i.getId() %>">
 							        <label for="edtSenha">Para acessar esta sala é necessário que você insira a senha:</label>
-	    							<input type="password" class="form-control" id="edtSenha" placeholder="Informe a senha da sala">
+	    							<input name="edtSenha" type="password" class="form-control" id="edtSenha" placeholder="Informe a senha da sala">
 							      </div>
 							      <div class="modal-footer">
 							        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-							        <button name="btnSala" value="<%= i.getId() %>" type="submit" class="btn btn-primary">Acessar</button>
+							        <button name="btnSala" value="<%= instituicao.getId() %>" type="submit" class="btn btn-primary">Acessar</button>
 							      </div>
 						      </form>
 						    </div>
@@ -162,7 +181,8 @@
 						</div>
 						<% } else { %>
 						<form action="EntrarSalaServlet" method="post">
-							<button name="btnSala" value="<%= i.getId() %>" class="btn btn-block btn-primary">Entrar</button>
+							<input type="text" name="edtRoom" style="display: none !important;" class="form-control invisible" id="edtRoom" value="<%= i.getId() %>">
+							<button name="btnSala" value="<%= instituicao.getId() %>" class="btn btn-block btn-primary">Entrar</button>
 						</form>
 						<% } %>
 					</div>
